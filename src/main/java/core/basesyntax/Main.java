@@ -1,13 +1,15 @@
 package core.basesyntax;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -21,7 +23,7 @@ public class Main {
         }
         for (Future<String> future : futures) {
             try {
-                future.get();
+                logger.log(Level.INFO, future.get());
             } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
